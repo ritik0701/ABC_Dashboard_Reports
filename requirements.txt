@@ -4,4 +4,4 @@ gunicorn==20.1.0
 mysqlclient==2.1.1
 sqlparse==0.4.3
 tzdata==2022.4
-django-heroku = '0.3.1'
+django-heroku==0.3.1
