@@ -18,3 +18,8 @@ def index(request):
         labels['stage'].append(stage)
         data['stage'].append(value)
     return render(request,"index.html",{'dashboard':dashboard,'labels':labels,'data':data})
+
+def load_data(request):
+    # report = Report()
+    reader = Report.load_data()
+    return render(request,"pie_chart.html",{'reader':reader})

@@ -1,5 +1,7 @@
-from unicodedata import decimal
 from django.db import models
+from .utils import read_CSV
+
+path = "C:/Ritik/job search/cybrilla/BusinessDevelopmentReport/data.csv"
 
 # Create your models here.
 class Report(models.Model):
@@ -63,6 +65,27 @@ class Report(models.Model):
 
 
         return dashboard
+
+    def load_data():
+        data = read_CSV(path)
+        for i in data:
+            # print(i)
+            Report.objects.update_or_create(
+                lead=i[0],
+                id=i[1],
+                services = i[2], 
+                domain = i[3], 
+                channels = i[4], 	
+                stage = i[5], 
+                status = i[6], 
+                sale_representative = i[7], 	
+                amount = i[8], 	
+                created_at = i[9], 
+                signed_at = i[10] if i[10]!="" else None, 	
+                closed_at = i[11] if i[11]!="" else None )
+        # Report.objects.bulk_create(data)
+        # self.save()
+        return(data)
 
 
             
