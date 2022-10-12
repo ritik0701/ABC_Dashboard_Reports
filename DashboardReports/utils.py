@@ -1,4 +1,5 @@
 import csv 
+import dateutil.parser as parser
 
 def read_CSV(path):
     try:
@@ -16,3 +17,8 @@ def read_CSV(path):
     except Exception as exception:
         print('exception in reading file')
         return exception.__str__()
+
+
+def validate_date(date_string):
+    date_time = parser.parse(date_string)
+    return(date_time)

@@ -36,6 +36,25 @@
                 </tbody>
             </table>
             {% endif %}
+
+            {% if dashboard.sales_rep_of_month %}
+            <!-- Sales Representative Of Month-->
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Sales Representative Of Month</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        {{dashboard.sales_rep_of_month}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            {% endif %}
+
         </div>
         
         <div class="row-child">
@@ -130,9 +149,9 @@
                 },
                   };
               
-                  window.onload = function() {
+                //   window.onload = function() {
     
-                  };
+                //   };
               
                 </script>
               
@@ -208,6 +227,89 @@
             },
               };
           
+            //   window.onload = function() {
+            //     var ctx = document.getElementById('status-pie-chart').getContext('2d');
+            //     window.myPie2 = new Chart(ctx, config);
+            //     console.log(config)
+    
+            //     var ctx = document.getElementById('stage-pie-chart').getContext('2d');
+            //     window.myPie = new Chart(ctx, stage_config);
+            //     console.log(stage_config)
+            //   };
+          
+            </script>
+          
+          {% endblock %}
+        </div>
+    </div>    
+</div>
+{% endif %}
+
+<!-- service report -->
+{% if dashboard.service_report %}
+<div style="border: 2px solid grey;margin-top: 20px;">
+    <div class="header" style="display:flex; justify-content: center; border: 2px solid grey;">
+        <h2>Leads' Service</h2>
+    </div>
+
+    <div class="row" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+        <div class="col-4" style="flex: 0.40;margin: auto; justify-content: center;">
+            <table class="table  table-striped table-bordered" style="padding-left: 5px ;">
+                <thead>
+                <tr>
+                    <th>Service </th>
+                    <th>Percentage</th>
+                </tr>
+                </thead>
+                <tbody>
+            
+                {% for service,value in dashboard.service_report.items %}
+                <tr>
+                    <td>
+                        {{service}}
+                    </td>
+                    <td>
+                        {{value}}%
+                    </td>
+                </tr>
+                {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6" style="flex: 0.60;justify-content: center;">
+            {% block content3 %}
+            <div id="container" style="width: 50%; margin:20px">
+              <canvas id="service-pie-chart"></canvas>
+            </div>
+        
+            <script>
+          
+              var service_config = {
+                type: 'pie',
+                data: {
+                  datasets: [{
+                    data: {{ data.service|safe }},
+                    backgroundColor: ['red', 'blue', 'green','yellow','orange'],
+                    label: 'Service_Report',
+                    borderWidth:5,
+                  }],
+                  labels: {{ labels.service|safe }}
+                },
+                options: {
+                  responsive: true,
+                  plugins: {
+                      legend: {
+                          position: 'top',
+                      },
+                  title: {
+                    display: true,
+                    text: 'Service Pie Chart'
+                }
+              }
+            },
+              };
+          
               window.onload = function() {
                 var ctx = document.getElementById('status-pie-chart').getContext('2d');
                 window.myPie2 = new Chart(ctx, config);
@@ -216,6 +318,102 @@
                 var ctx = document.getElementById('stage-pie-chart').getContext('2d');
                 window.myPie = new Chart(ctx, stage_config);
                 console.log(stage_config)
+
+                var ctx = document.getElementById('service-pie-chart').getContext('2d');
+                window.myPie = new Chart(ctx, service_config);
+                console.log(service_config)
+              };
+          
+            </script>
+          
+          {% endblock %}
+        </div>
+    </div>    
+</div>
+{% endif %}
+
+
+<!-- Domain report -->
+{% if dashboard.service_report %}
+<div style="border: 2px solid grey;margin-top: 20px;">
+    <div class="header" style="display:flex; justify-content: center; border: 2px solid grey;">
+        <h2>Leads' Domain</h2>
+    </div>
+
+    <div class="row" style="display: flex;flex-direction: row;justify-content: space-evenly;">
+        <div class="col-4" style="flex: 0.40;margin: auto; justify-content: center;">
+            <table class="table  table-striped table-bordered" style="padding-left: 5px ;">
+                <thead>
+                <tr>
+                    <th>Domain </th>
+                    <th>Percentage</th>
+                </tr>
+                </thead>
+                <tbody>
+            
+                {% for domain,value in dashboard.domain_report.items %}
+                <tr>
+                    <td>
+                        {{domain}}
+                    </td>
+                    <td>
+                        {{value}}%
+                    </td>
+                </tr>
+                {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6" style="flex: 0.60;justify-content: center;">
+            {% block content4 %}
+            <div id="container" style="width: 50%; margin:20px">
+              <canvas id="domain-pie-chart"></canvas>
+            </div>
+        
+            <script>
+          
+              var domain_config = {
+                type: 'pie',
+                data: {
+                  datasets: [{
+                    data: {{ data.domain|safe }},
+                    backgroundColor: ['red', 'blue', 'green','yellow','orange'],
+                    label: 'Domain_Report',
+                    borderWidth:5,
+                  }],
+                  labels: {{ labels.domain|safe }}
+                },
+                options: {
+                  responsive: true,
+                  plugins: {
+                      legend: {
+                          position: 'top',
+                      },
+                  title: {
+                    display: true,
+                    text: 'Domain Pie Chart'
+                }
+              }
+            },
+              };
+          
+              window.onload = function() {
+                var ctx = document.getElementById('status-pie-chart').getContext('2d');
+                window.myPie2 = new Chart(ctx, config);
+                console.log(config)
+    
+                var ctx = document.getElementById('stage-pie-chart').getContext('2d');
+                window.myPie = new Chart(ctx, stage_config);
+                console.log(stage_config)
+
+                var ctx = document.getElementById('service-pie-chart').getContext('2d');
+                window.myPie = new Chart(ctx, service_config);
+                console.log(service_config)
+
+                var ctx = document.getElementById('domain-pie-chart').getContext('2d');
+                window.myPie = new Chart(ctx, domain_config);
+                console.log(domain_config)
               };
           
             </script>
@@ -289,6 +487,12 @@
 
 </div>
 {% endif %}
+
+
+
+
+
+
 
 {% endif %}
 </div>
