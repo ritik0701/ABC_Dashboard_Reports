@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 from .utils import read_CSV
 
@@ -5,7 +6,7 @@ path = "C:/Users/ritik/Downloads/data2.csv"
 
 # Create your models here.
 class Report(models.Model):
-    lead = models.CharField(max_length = 200)
+    lead = models.CharField(max_length = 200,unique=True)
     id	= models.IntegerField( primary_key=True)
     services = models.CharField(max_length = 200)
     domain = models.CharField(max_length = 200)	
