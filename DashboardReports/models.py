@@ -1,7 +1,7 @@
 from django.db import models
 from .utils import read_CSV
 
-path = "C:/Ritik/job search/cybrilla/BusinessDevelopmentReport/data.csv"
+path = "C:/Users/ritik/Downloads/data2.csv"
 
 # Create your models here.
 class Report(models.Model):
@@ -34,10 +34,12 @@ class Report(models.Model):
         total_loss = 0
 
         for row in Report.objects.all():
+            # 
             if row.status == "Signed":
                 dashboard['total_leads']+=1
                 dashboard['list_total_leads'].append(row.lead)
 
+            # 
             if row.status in dashboard['status_report'].keys():
                 dashboard['status_report'][row.status]+=1
 
