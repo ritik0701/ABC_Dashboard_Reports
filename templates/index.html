@@ -46,11 +46,13 @@
                 </tr>
                 </thead>
                 <tbody>
+                    {% for i in dashboard.sales_rep_of_month %}
                 <tr>
                     <td>
-                        {{dashboard.sales_rep_of_month}}
+                        {{i}}
                     </td>
                 </tr>
+                {% endfor %}
                 </tbody>
             </table>
             {% endif %}

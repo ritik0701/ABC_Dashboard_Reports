@@ -45,7 +45,7 @@ class Report(models.Model):
         dashboard['stage_report']={'Prospect':0,'Discussion':0,'Proposal':0,'Contracting':0,'Payment':0}
         dashboard['forecast_revenue'] = []
         dashboard['potential_loss'] = []
-        dashboard['sales_rep_of_month'] = ''
+        dashboard['sales_rep_of_month'] = []
         dashboard['service_report'] = {'MFLite':0, 'MFPro':0,'AMC':0}
         dashboard['domain_report'] = {'AMC':0,'Fintech':0,'Enterprise':0}
 
@@ -122,8 +122,7 @@ class Report(models.Model):
 
         for sales_rep,amount in sales_rep_count.items():
             if max_amount == amount:
-                dashboard['sales_rep_of_month'] = sales_rep
-                break
+                dashboard['sales_rep_of_month'].append(sales_rep)
 
         return dashboard
 
